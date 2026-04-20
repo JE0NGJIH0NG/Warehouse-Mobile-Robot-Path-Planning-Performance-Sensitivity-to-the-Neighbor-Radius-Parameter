@@ -1,0 +1,59 @@
+ros2 lifecycle set /map_server configure
+ros2 lifecycle set /map_server activate
+
+ros2 lifecycle set /amcl configure
+ros2 lifecycle set /amcl activate
+
+ros2 topic pub -1 /initialpose geometry_msgs/msg/PoseWithCovarianceStamped '
+header:
+  frame_id: "map"
+pose:
+  pose:
+    position:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]'
+
+ros2 topic pub -1 /initialpose geometry_msgs/msg/PoseWithCovarianceStamped '
+header:
+  frame_id: "map"
+pose:
+  pose:
+    position:
+      x: -13.0
+      y: 23.0
+      z: 0.0
+    orientation:
+      x: 0.0
+      y: 0.0
+      z: 0.9489846
+      w: 0.3153224
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]'
+
+
+ros2 lifecycle set /behavior_server configure
+ros2 lifecycle set /behavior_server activate
+
+
+ros2 lifecycle set /controller_server configure
+ros2 lifecycle set /controller_server activate
+
+ros2 lifecycle set /planner_server configure
+ros2 lifecycle set /planner_server activate
+
+ros2 lifecycle set /bt_navigator configure
+ros2 lifecycle set /bt_navigator activate
+
+ros2 lifecycle set /smoother_server configure
+ros2 lifecycle set /smoother_server activate
+
+
+cd ~/qrrt
+colcon build --symlink-install --packages-select qrrt
+source install/setup.bash
